@@ -1,13 +1,13 @@
-name: Test PG_DB
+name: testPGDB
 
 on: [push]
 
 jobs:
-  test:
-  runs-on: {ubuntu-latest,   r: 'release'}
-env:
-  PG_DB: ${{ secrets.PG_DB }}
-steps:
-  - name: Print PG_DB
-run: |
-  echo "PG_DB=$PG_DB"
+  testPGDB:
+      runs-on: {ubuntu-latest,   r: 'release'}
+      env:
+        PG_DB: ${{ secrets.PG_DB }}
+      steps:
+        name: printPGDB
+        run:
+          echo "PG_DB=$PG_DB"
