@@ -1,0 +1,13 @@
+name: Test PG_DB
+
+on: [push]
+
+jobs:
+  test:
+  runs-on: ubuntu-latest
+env:
+  PG_DB: ${{ secrets.PG_DB }}
+steps:
+  - name: Print PG_DB
+run: |
+  echo "PG_DB=$PG_DB"
