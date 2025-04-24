@@ -43,7 +43,7 @@ insert_new_data <- function (conn, next_id = 0, formatted_data) {
   if (nrow(new_data) > 0) {
     if (DBI::dbIsValid(conn)) {
       rows_inserted <- RPostgres::dbAppendTable(conn, DBI::Id(schema = "student_miguel", table = "data_sp500"), new_data)
-      message(paste(rows_inserted, "(new) chunk records appended to DB."))
+      message(paste(rows_inserted, " (new) chunk records appended to DB."))
       return(rows_inserted)
     } else {
       message(paste("Error: Appending (new) chunk records to DB has failed! Starting record ID: "), next_id)

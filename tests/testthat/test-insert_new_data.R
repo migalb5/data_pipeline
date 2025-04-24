@@ -65,7 +65,8 @@ test_that("A set of financial records is not appended to the DB because they are
   for (chunk in batch_chunks) {
     fin_data <- yahoo_query_data(chunk, date_from, date_to)
     formatted_data <- format_data(fin_data, batch)
-    rows_inserted <- insert_new_data(conn, 0, formatted_data)
+    rows_appended <- insert_new_data(conn, 0, formatted_data)
+    expect_equal(rows_appended, nrow(batch) * 5 * (27-26))
   }
 
   batch <- data.frame(symbol = c("AAPL", "META"), index_ts = c("apple_inc_aapl", "meta_platforms_meta"))
@@ -73,8 +74,8 @@ test_that("A set of financial records is not appended to the DB because they are
   for (chunk in batch_chunks) {
     fin_data <- yahoo_query_data(chunk, date_from, date_to)
     formatted_data <- format_data(fin_data, batch)
-    rows_inserted <- insert_new_data(conn, 0, formatted_data)
-    expect_equal(rows_inserted, 0)
+    rows_appended <- insert_new_data(conn, 0, formatted_data)
+    expect_equal(rows_appended, 0)
   }
   query = glue::glue_sql("DELETE FROM student_miguel.data_sp500
                           WHERE date = {date_from} AND
