@@ -5,7 +5,7 @@ on:
     branches: [main, master]
   pull_request:
 
-name: R-CMD-check.yaml
+name: R-CMD-check
 
 permissions: read-all
 
@@ -27,14 +27,14 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      # PG_DB: ${{ secrets.PG_DB }}
-      # PG_HOST: ${{ secrets.PG_HOST }}
-      # PG_USER: ${{ secrets.PG_USER }}
-      # PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
-      PG_DB: "postgres"
-      PG_HOST: 'dlh.cerk0ko48rck.us-east-1.rds.amazonaws.com'
-      PG_USER: "miguel"
-      PG_PASSWORD: "IjRiP8UqoFuk"
+      PG_DB: ${{ secrets.PG_DB }}
+      PG_HOST: ${{ secrets.PG_HOST }}
+      PG_USER: ${{ secrets.PG_USER }}
+      PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+      # PG_DB: "postgres"
+      # PG_HOST: 'dlh.cerk0ko48rck.us-east-1.rds.amazonaws.com'
+      # PG_USER: "miguel"
+      # PG_PASSWORD: "IjRiP8UqoFuk"
       R_KEEP_PKG_SOURCE: yes
 
     steps:
