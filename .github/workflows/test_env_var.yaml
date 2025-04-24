@@ -8,6 +8,5 @@ jobs:
       env:
         PG_DB: ${{ secrets.PG_DB }}
       steps:
-        - run:
-          echo PG_DB=
-          echo $PG_DB
+        - run: echo PG_DB=
+        - run: echo $PG_DB
