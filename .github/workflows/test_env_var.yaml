@@ -8,6 +8,5 @@ jobs:
       env:
         PG_DB: ${{ secrets.PG_DB }}
       steps:
-        name: printPGDB
-        run:
+        - run:
           echo "PG_DB=$PG_DB"
