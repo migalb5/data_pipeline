@@ -3,12 +3,13 @@
 #'
 #' @param conn A (DBI/Postgres) connection to the database from which reference data is read and result data is written to.
 #'
-#' @returns A data frame containing the pairs (index_ts, symbol) found in the reference data table; or FALSE, in case of a non-valid DB connection.
-#' @export
+#' @returns A data frame containing the pairs (index_ts, symbol) found in the reference data table; or NULL, in case of a non-valid DB connection.
 #'
 #' @examples
+#' \dontrun{
 #' conn <- connect_db()
 #' symbols <- fetch_symbols(conn)
+#' }
 fetch_symbols <- function (conn) {
   if (DBI::dbIsValid(conn)) {
     query = glue::glue_sql("SELECT DISTINCT index_ts, symbol FROM sp500.info
@@ -16,5 +17,5 @@ fetch_symbols <- function (conn) {
     df <- DBI::dbGetQuery(conn, query)
     return(df)
   }
-  return(FALSE)
+  return(NULL)
 }

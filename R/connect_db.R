@@ -11,7 +11,6 @@
 #' - PG_PASSWORD: database password
 #'
 #' @return A DBI connection object (class `"PqConnection"`); or NULL, in case any error occurs and the DB connection could not be established.
-#' @export
 #'
 #' @examples
 #' \dontrun{
