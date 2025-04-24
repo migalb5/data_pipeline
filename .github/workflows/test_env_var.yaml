@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   testPGDB:
-      runs-on: {ubuntu-latest,   r: 'release'}
+      runs-on: ubuntu-latest
       env:
         PG_DB: ${{ secrets.PG_DB }}
       steps:
