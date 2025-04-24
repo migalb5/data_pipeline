@@ -13,8 +13,10 @@
 push_summary_table <- function (conn, batch_log) {
 #  browser()
   if (DBI::dbIsValid(conn)) {
-    result <- RPostgres::dbAppendTable(conn, DBI::Id(schema = "student_miguel", table = "pipeline_logs"), batch_log)
-    if (result > 0) {
+#    result <- RPostgres::dbAppendTable(conn, DBI::Id(schema = "student_miguel", table = "pipeline_logs"), batch_log)
+    result <- DBI::dbWriteTable(conn = conn, name = DBI::Id(schema = "student_miguel", table = "pipeline_logs"), value = batch_log, append = TRUE, row.names = FALSE)
+#    if (result > 0) {
+    if (result) {
       message("Summary table successfully written to DB.")
       return(TRUE)
     }

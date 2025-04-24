@@ -15,7 +15,7 @@
 #' }
 insert_new_data <- function (conn, next_id = 0, formatted_data) {
   if (DBI::dbIsValid(conn)) {
-    query = glue::glue_sql("SELECT MAX(id) FROM \"student_miguel\".\"data_sp500\"", .con = conn)
+    query = glue::glue_sql("SELECT MAX(id) FROM student_miguel.data_sp500", .con = conn)
     df <- DBI::dbGetQuery(conn, query)
   } else {
     return(-1)
@@ -29,7 +29,7 @@ insert_new_data <- function (conn, next_id = 0, formatted_data) {
   # checking for duplicate records
   #tuples_to_check <- formatted_data %>% group_by(index_ts, date)
   if (DBI::dbIsValid(conn)) {
-    query = glue::glue_sql("SELECT index_ts, date FROM \"student_miguel\".\"data_sp500\"
+    query = glue::glue_sql("SELECT index_ts, date FROM student_miguel.data_sp500
                            GROUP BY index_ts, date
                            ORDER BY index_ts ASC", .con = conn)
     tuples_already_inserted <- DBI::dbGetQuery(conn, query)
