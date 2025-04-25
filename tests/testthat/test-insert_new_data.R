@@ -69,6 +69,7 @@ test_that("A set of financial records is not appended to the DB because they are
     rows_appended <- insert_new_data(conn, 0, formatted_data)
     expect_equal(rows_appended, nrow(batch) * 5 * (27-26))
   }
+  Sys.sleep(5)
 
   batch <- data.frame(symbol = c("AAPL", "META"), index_ts = c("apple_inc_aapl", "meta_platforms_meta"))
   batch_chunks <- split_batch(batch, 5)
