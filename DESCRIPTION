@@ -15,7 +15,8 @@ Imports:
     RPostgres,
     tibble,
     tidyquant,
-    tidyr
+    tidyr,
+    utils
 Suggests: 
     testthat,
     withr
