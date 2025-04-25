@@ -1,5 +1,5 @@
 
-conn <- connect_db()
+#conn <- connect_db()
 
 test_that("A set of financial records is correctly appended to the DB", {
   date_from = "2024-03-26"
@@ -7,8 +7,7 @@ test_that("A set of financial records is correctly appended to the DB", {
   index_ts1 = "apple_inc_aapl"
   index_ts2 = "meta_platforms_meta"
 
-#  conn <- connect_db()
-
+  conn <- connect_db()
   batch <- data.frame(symbol = c("AAPL", "META"), index_ts = c("apple_inc_aapl", "meta_platforms_meta"))
   batch_chunks <- split_batch(batch, 5)
   for (chunk in batch_chunks) {
@@ -51,8 +50,8 @@ test_that("A set of financial records is correctly appended to the DB", {
                           WHERE date = {date_from} AND
                          (index_ts = {index_ts1} OR index_ts = {index_ts2})", .con = conn)
   DBI::dbExecute(conn, query)
-#  DBI::dbDisconnect(conn)
-#  Sys.sleep(5)
+  DBI::dbDisconnect(conn)
+  Sys.sleep(5)
 })
 
 
@@ -63,7 +62,7 @@ test_that("A set of financial records is not appended to the DB because they are
   index_ts1 = "apple_inc_aapl"
   index_ts2 = "meta_platforms_meta"
 
-#  conn <- connect_db()
+  conn <- connect_db()
   batch <- data.frame(symbol = c("AAPL", "META"), index_ts = c("apple_inc_aapl", "meta_platforms_meta"))
   batch_chunks <- split_batch(batch, 5)
   for (chunk in batch_chunks) {
@@ -73,7 +72,7 @@ test_that("A set of financial records is not appended to the DB because they are
     expect_equal(rows_appended, nrow(batch) * 5 * (27-26))
   }
 #  DBI::dbDisconnect(conn)
-#  Sys.sleep(5)
+  Sys.sleep(10)
 
 #  conn <- connect_db()
   batch <- data.frame(symbol = c("AAPL", "META"), index_ts = c("apple_inc_aapl", "meta_platforms_meta"))
