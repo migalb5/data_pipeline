@@ -3,6 +3,7 @@
 #'
 #' @param start_date The date (as a string in the format YYYY-MM-DD) of the first day for which data is to be fetched. By default, it is the date of yesterday.
 #' @param end_date The date (as a string in the format YYYY-MM-DD) of the day after the last day for which data is to be fetched. By default, it is the date of today.
+#' @param chunk_size The size upon which the batch (of company symbols) will be split, for processing (financial data acquisition from Yahoo!Finance).
 #'
 #' @returns Nothing.
 #' @export
@@ -22,7 +23,7 @@ start_pipeline <- function (start_date = Sys.Date() - 1, end_date = Sys.Date(), 
   batch <- fetch_symbols(conn)
   if (!is.null(batch)) {
     batch_log <- build_summary_table()
-    batch_chunks <- split_batch(batch, chunk_size)
+    batch_chunks <- split_batch(batch, as.integer(chunk_size))
     i = 1
     tot_rows_inserted = 0
     for (chunk in batch_chunks) {
