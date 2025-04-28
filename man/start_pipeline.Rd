@@ -4,7 +4,11 @@
 \alias{start_pipeline}
 \title{Runs a data-fetching iteration of the data pipeline}
 \usage{
-start_pipeline(start_date = Sys.Date() - 1, end_date = Sys.Date())
+start_pipeline(
+  start_date = Sys.Date() - 1,
+  end_date = Sys.Date(),
+  chunk_size = 20
+)
 }
 \arguments{
 \item{start_date}{The date (as a string in the format YYYY-MM-DD) of the first day for which data is to be fetched. By default, it is the date of yesterday.}
@@ -22,5 +26,7 @@ Runs a data-fetching iteration of the data pipeline
 start_pipeline()
 start_pipeline("2024-04-01", "2024-04-03")
 start_pipeline("2024-04-01", "2024-04-30")
+start_pipeline("2024-05-01", "2024-05-31", 35)
+start_pipeline(chunk_size = 25)
 }
 }
