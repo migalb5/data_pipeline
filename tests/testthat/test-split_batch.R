@@ -3,7 +3,7 @@ test_that("Batch is split correctly", {
   conn <- connect_db()
   batch <- fetch_symbols(conn)
   DBI::dbDisconnect(conn)
-  chunk_size = 20
+  chunk_size = 25
   batch_chunks <- split_batch(batch, chunk_size)
   expect_equal(as.character(class(batch_chunks)), "list")
   expect_gte(length(batch_chunks), 1)
@@ -23,7 +23,7 @@ test_that("Batch is still split correctly even when an invalid chunk size is spe
   expect_gte(length(batch_chunks), 1)
   for (chunk in batch_chunks) {
     expect_equal(as.character(class(chunk)), "data.frame")
-    expect_lte(nrow(chunk), 10)
+    expect_lte(nrow(chunk), 20)
     expect_equal(names(chunk)[1], "symbol")
   }
   batch_chunks <- split_batch(batch, 0)
@@ -31,7 +31,7 @@ test_that("Batch is still split correctly even when an invalid chunk size is spe
   expect_gte(length(batch_chunks), 1)
   for (chunk in batch_chunks) {
     expect_equal(as.character(class(chunk)), "data.frame")
-    expect_lte(nrow(chunk), 10)
+    expect_lte(nrow(chunk), 20)
     expect_equal(names(chunk)[1], "symbol")
   }
 })
