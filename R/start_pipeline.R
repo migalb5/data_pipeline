@@ -12,14 +12,17 @@
 #' start_pipeline()
 #' start_pipeline("2024-04-01", "2024-04-03")
 #' start_pipeline("2024-04-01", "2024-04-30")
+#' start_pipeline("2024-05-01", "2024-05-31", 35)
+#' start_pipeline(chunk_size = 25)
 #' }
-start_pipeline <- function (start_date = Sys.Date() - 1, end_date = Sys.Date()) {
+start_pipeline <- function (start_date = Sys.Date() - 1, end_date = Sys.Date(), chunk_size = 20) {
+  # check validity of all function arguments: missing
   message(paste("Data fetching process started. Period: ", start_date, " to ", end_date))
   conn <- connect_db()
   batch <- fetch_symbols(conn)
   if (!is.null(batch)) {
     batch_log <- build_summary_table()
-    batch_chunks <- split_batch(batch, 20)
+    batch_chunks <- split_batch(batch, chunk_size)
     i = 1
     tot_rows_inserted = 0
     for (chunk in batch_chunks) {
