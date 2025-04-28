@@ -14,6 +14,8 @@ start_pipeline(
 \item{start_date}{The date (as a string in the format YYYY-MM-DD) of the first day for which data is to be fetched. By default, it is the date of yesterday.}
 
 \item{end_date}{The date (as a string in the format YYYY-MM-DD) of the day after the last day for which data is to be fetched. By default, it is the date of today.}
+
+\item{chunk_size}{The size upon which the batch (of company symbols) will be split, for processing (financial data acquisition from Yahoo!Finance). Default value is 20.}
 }
 \value{
 Nothing.

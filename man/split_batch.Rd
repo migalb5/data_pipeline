@@ -12,7 +12,7 @@ split_batch(batch, chunk_size)
 \item{chunk_size}{The size (an integer greater than zero) of each section (chunk).}
 }
 \value{
-A list of data frames containing each 1 column (named "symbol") of size equal to chunk_size; in case chunk_size is invalid, then a default value of 10 is assumed.
+A list of data frames containing each 1 column (named "symbol") of size equal to chunk_size; in case chunk_size is invalid, then a default value of 20 is assumed.
 }
 \description{
 Divides the list of symbols (the batch) into separate sections (chunks), so that the Yahoo!Finance API does not get overloaded when the calls are made.
